@@ -1,5 +1,7 @@
 const path = require('path'); //path del proyecto principal
 const HtmlWebpackPlugin = require('html-webpack-plugin'); //traemos el plugin de html
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
     entry: './src/index.js', // punto de entrada
     output: { // lugar al que saldrán todos los archivos
@@ -27,13 +29,31 @@ module.exports = {
                         loader: 'html-loader' // loader a usar
                     }
                 ]
-            }
+            },
+            {
+            test: /\.(css|s[ac]ss)$/i,
+            use: [
+                "style-loader",
+                "css-loader",
+                "sass-loader",
+            ],
+            },            
         ]
     },
     plugins: [ // plugins 
         new HtmlWebpackPlugin({ // instanciamos el plugin para html 
             template: './public/index.html', // archivo raíz a transformar
             filename: './index.html' // el archivo resultante
-        })
-    ]
+        }),
+        new MiniCssExtractPlugin({
+			filename: '[name].css'
+		}),
+    ],
+    devServer: {
+        allowedHosts: path.join(__dirname, 'dist'), // contentBase corresponde a webpack 4
+// ahora en Webpack 5 se usa allowedHosts
+// créditos al compañero Fabian Rivera Restrepo
+        port: 3005,
+        compress: true,
+    }
 }
