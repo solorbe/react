@@ -6,7 +6,8 @@ module.exports = {
     entry: './src/index.js', // punto de entrada
     output: { // lugar al que saldrán todos los archivos
         path: path.resolve(__dirname, 'dist'), //en nuestro path, crea la carpeta dist
-        filename: 'bundle.js' // nombre del archivo js resultante
+        filename: 'bundle.js',// nombre del archivo js resultante
+        publicPath: '/' 
     },
     mode: 'development',
 
@@ -49,11 +50,13 @@ module.exports = {
 			filename: '[name].css'
 		}),
     ],
-    devServer: {
-        allowedHosts: path.join(__dirname, 'dist'), // contentBase corresponde a webpack 4
-// ahora en Webpack 5 se usa allowedHosts
-// créditos al compañero Fabian Rivera Restrepo
-        port: 3005,
-        compress: true,
-    }
+//     devServer: {
+//         allowedHosts: path.join(__dirname, 'dist'), // contentBase corresponde a webpack 4
+//               // ahora en Webpack 5 se usa allowedHosts
+//         port: 3005,
+//         compress: true,
+//     }
+        devServer:{
+            historyApiFallback:true,
+        }
 }
