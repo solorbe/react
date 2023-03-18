@@ -7,9 +7,9 @@ import '../styles/global.css';
 const App = () => {
 	return (
 		// <h1>Hola Mundo!Bienvenidos a este moco!!!</h1>
-	
+	<Layout>
 		<Login/>	
-	
+	</Layout>
 	);
 }
 
